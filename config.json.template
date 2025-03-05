@@ -1,0 +1,13 @@
+{
+  "showroom": {
+    "mainName": "",
+    "chatPollingIntervalSec": 15
+  },
+  "fuyukaApi": {
+    "baseUrl": "ws://127.0.0.1:38321",
+    "answerLevel": 16
+  },
+  "oneComme": {
+    "pathUsersCsv": ""
+  }
+}
