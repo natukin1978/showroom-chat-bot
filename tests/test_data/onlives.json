@@ -1,0 +1,221 @@
+{
+  "corner_image_path": "https://static.showroom-live.com/assets/img/corner/",
+  "onlives": [
+    {
+      "genre_id": 0,
+      "banners": [
+        {
+          "url": "https://support.showroom-live.com/hc/ja/categories/19875662139929",
+          "image": "https://static.showroom-live.com/image/genre_banner/052b378f56ee7f0e4024bc4b4f5151aa.png"
+        },
+        {
+          "url": "https://x.gd/S64bU",
+          "image": "https://static.showroom-live.com/image/genre_banner/a41af4d562034506fc851b1811e49bb9.png"
+        }
+      ],
+      "has_upcoming": false,
+      "genre_name": "人気",
+      "lives": [
+        {
+          "badge_list": [],
+          "genre_ranking_rank": 0,
+          "room_url_key": "f56fe9404536",
+          "official_lv": 0,
+          "follower_num": 2,
+          "started_at": 1740925582,
+          "live_id": 20992390,
+          "genre_name": "バーチャル",
+          "is_follow": false,
+          "streaming_url_list": [
+            {
+              "is_default": true,
+              "url": "https://hls-css.live.showroom-live.com/live/07a3042ecda43d2cfaa124385949f73bf04e66c7dc07449a4048a4ca9c3f2ad7_l.m3u8",
+              "label": "low quality",
+              "type": "hls",
+              "id": 4,
+              "quality": 150
+            }
+          ],
+          "live_type": 0,
+          "tags": [],
+          "image": "https://static.showroom-live.com/image/room/cover/7d0c90f7ea1890adbeb9b577e01a3f7ec08bc8b16426df8708a5411f776f3593_s.png?v=1740138919",
+          "view_num": 0,
+          "genre_id": 107,
+          "main_name": "ナツキソのゲームメメント",
+          "liver_theme_title": "こんなつ！",
+          "premium_room_type": 0,
+          "cell_type": 100,
+          "bcsvr_key": "1405186:VwMLo7ws",
+          "room_id": 544593
+        }
+      ]
+    },
+    {
+      "genre_id": 758,
+      "banners": [
+        {
+          "url": "https://www.showroom-live.com/lp/newcomer_liver#campaign",
+          "image": "https://static.showroom-live.com/image/genre_banner/8c2b34671b1b1aef593451c0c5eaf831.png"
+        }
+      ],
+      "has_upcoming": true,
+      "genre_name": "注目の新人",
+      "lives": []
+    },
+    {
+      "genre_id": 101,
+      "banners": [],
+      "has_upcoming": true,
+      "genre_name": "アーティスト",
+      "lives": []
+    },
+    {
+      "genre_id": 102,
+      "banners": [],
+      "has_upcoming": true,
+      "genre_name": "アイドル",
+      "lives": []
+    },
+    {
+      "genre_id": 103,
+      "banners": [
+        {
+          "url": "https://campaign.showroom-live.com/frecam_misscircle2024/",
+          "image": "https://static.showroom-live.com/image/genre_banner/fd49c91698a0bb3c96f3b9d534fe83dc.png"
+        }
+      ],
+      "has_upcoming": true,
+      "genre_name": "タレント",
+      "lives": []
+    },
+    {
+      "genre_id": 104,
+      "banners": [],
+      "has_upcoming": true,
+      "genre_name": "声優",
+      "lives": []
+    },
+    {
+      "genre_id": 105,
+      "banners": [],
+      "has_upcoming": true,
+      "genre_name": "芸人",
+      "lives": []
+    },
+    {
+      "genre_id": 107,
+      "banners": [
+        {
+          "url": "https://lp.showroom-live.com/virtual_liver/",
+          "image": "https://static.showroom-live.com/image/genre_banner/56c4a09903c8dfc3ad5c2c8b4b4eb5f7.png"
+        }
+      ],
+      "has_upcoming": true,
+      "genre_name": "バーチャル",
+      "lives": [
+        {
+          "badge_list": [],
+          "genre_ranking_rank": 0,
+          "room_url_key": "f56fe9404536",
+          "official_lv": 0,
+          "follower_num": 2,
+          "started_at": 1740925582,
+          "live_id": 20992390,
+          "genre_name": "バーチャル",
+          "is_follow": false,
+          "streaming_url_list": [
+            {
+              "is_default": true,
+              "url": "https://hls-css.live.showroom-live.com/live/07a3042ecda43d2cfaa124385949f73bf04e66c7dc07449a4048a4ca9c3f2ad7_l.m3u8",
+              "label": "low quality",
+              "type": "hls",
+              "id": 4,
+              "quality": 150
+            }
+          ],
+          "live_type": 0,
+          "tags": [],
+          "image": "https://static.showroom-live.com/image/room/cover/7d0c90f7ea1890adbeb9b577e01a3f7ec08bc8b16426df8708a5411f776f3593_s.png?v=1740138919",
+          "view_num": 0,
+          "genre_id": 107,
+          "main_name": "ナツキソのゲームメメント",
+          "liver_theme_title": "こんなつ！",
+          "premium_room_type": 0,
+          "cell_type": 100,
+          "bcsvr_key": "1405186:VwMLo7ws",
+          "room_id": 544593
+        }
+      ]
+    },
+    {
+      "genre_id": 108,
+      "banners": [],
+      "has_upcoming": true,
+      "genre_name": "モデル",
+      "lives": []
+    },
+    {
+      "genre_id": 109,
+      "banners": [],
+      "has_upcoming": true,
+      "genre_name": "俳優",
+      "lives": []
+    },
+    {
+      "genre_id": 110,
+      "banners": [],
+      "has_upcoming": true,
+      "genre_name": "アナウンサー",
+      "lives": []
+    },
+    {
+      "genre_id": 111,
+      "banners": [],
+      "has_upcoming": true,
+      "genre_name": "グローバル",
+      "lives": []
+    },
+    {
+      "genre_id": 200,
+      "banners": [],
+      "has_upcoming": true,
+      "genre_name": "ライバー",
+      "lives": []
+    },
+    {
+      "genre_id": 704,
+      "banners": [
+        {
+          "url": "https://campaign.showroom-live.com/ascana_project/",
+          "image": "https://static.showroom-live.com/image/genre_banner/0b0f4626c3fccfeb48288a99674631bc.png"
+        }
+      ],
+      "has_upcoming": true,
+      "genre_name": "メンズ",
+      "lives": []
+    },
+    {
+      "genre_id": 703,
+      "banners": [],
+      "has_upcoming": false,
+      "genre_name": "カラオケ",
+      "lives": []
+    },
+    {
+      "genre_id": 706,
+      "banners": [],
+      "has_upcoming": false,
+      "genre_name": "ゲーム",
+      "lives": []
+    },
+    {
+      "genre_id": 701,
+      "banners": [],
+      "has_upcoming": false,
+      "genre_name": "誕生日",
+      "lives": []
+    }
+  ],
+  "bcsvr_port": 8080,
+  "bcsvr_host": "online.showroom-live.com"
+}
