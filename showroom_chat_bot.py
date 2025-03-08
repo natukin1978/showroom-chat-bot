@@ -48,7 +48,9 @@ async def main():
     async def recv_showroom_live_response(message: str) -> None:
         messages = message.split()
         try:
-            json_ws = json.loads(messages[2])
+            # JSON文字列が分割される事あるので連結する
+            json_str = "".join(messages[2:])
+            json_ws = json.loads(json_str)
             await bot.on_message_from_ws(json_ws)
         except json.JSONDecodeError as e:
             logger.error(f"Error JSONDecode: {e}")
