@@ -21,7 +21,7 @@ class ShowroomBot:
         self.chat_polling_interval = config_sr["chatPollingIntervalSec"]
         self.scla = ShowroomCommentLogAnalyzer()
         self.room_id = None
-        self.chat_task = None
+        self.bcsvr_key = None
 
     async def on_message(self, comments):
         for comment in comments:
@@ -36,7 +36,33 @@ class ShowroomBot:
             needs_response = is_hit_by_message_json(answerLevel, json_data)
             await Fuyuka.send_message_by_json_with_buf(json_data, needs_response)
 
-    async def get_room_id(self) -> int | None:
+    async def on_message_from_ws(self, json_ws):
+        if "ac" not in json_ws:
+            return
+
+        id = str(json_ws["u"])
+        if id in g.set_exclude_id:
+            # 無視するID
+            return
+
+        json_data = create_message_json()
+        json_data["id"] = id
+        json_data["displayName"] = json_ws["ac"]
+        if "cm" in json_ws:
+            json_data["content"] = json_ws["cm"]
+        else:
+            json_data["content"] = ""
+
+        answerLevel = g.config["fuyukaApi"]["answerLevel"]
+
+        if "g" in json_ws:
+            json_data["content"] += " ギフトをプレゼント！"
+            answerLevel = 100
+
+        needs_response = is_hit_by_message_json(answerLevel, json_data)
+        await Fuyuka.send_message_by_json_with_buf(json_data, needs_response)
+
+    async def get_live(self):
         try:
             url = "https://www.showroom-live.com/api/live/onlives"
             async with aiohttp.ClientSession() as session:
@@ -45,9 +71,7 @@ class ShowroomBot:
                     soa = ShowroomOnlivesAnalyzer()
                     soa.merge(response_json)
                     live = soa.get_live(self.main_name)
-                    if not live:
-                        return None
-                    return live["room_id"]
+                    return live
         except Exception as e:
             logger.error(f"Error getting Room ID: {e}")
             return None
@@ -77,10 +101,15 @@ class ShowroomBot:
 
     async def run(self):
         while True:
-            room_id = await self.get_room_id()
-            if room_id:
-                self.room_id = room_id
+            live = await self.get_live()
+            if live:
+                self.room_id = live["room_id"]
+                self.bcsvr_key = live["bcsvr_key"]
                 break
             await asyncio.sleep(self.chat_polling_interval)
 
-        self.chat_task = asyncio.create_task(self.get_chat_messages())
+        while True:
+            if g.websocket_showroom_live:
+                await g.websocket_showroom_live.send(f"SUB\t{self.bcsvr_key}")
+                break
+            await asyncio.sleep(self.chat_polling_interval)

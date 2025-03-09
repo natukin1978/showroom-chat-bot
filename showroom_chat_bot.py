@@ -1,4 +1,5 @@
 import asyncio
+import json
 import logging
 import os
 import sys
@@ -24,10 +25,13 @@ g.config = read_config()
 # ロガーの設定
 logging.basicConfig(level=logging.INFO)
 
+logger = logging.getLogger(__name__)
+
 g.map_is_first_on_stream = {}
 g.one_comme_users = OneCommeUsers.read_one_comme_users()
 g.set_exclude_id = read_text_set("exclude_id.txt")
 # g.set_needs_response = set()
+g.websocket_showroom_live = None
 g.websocket_fuyuka = None
 
 
@@ -38,11 +42,33 @@ async def main():
             return ""
         return conf_fa["baseUrl"]
 
+    def set_ws_showroom_live(ws) -> None:
+        g.websocket_showroom_live = ws
+
+    async def recv_showroom_live_response(message: str) -> None:
+        messages = message.split()
+        try:
+            # JSON文字列が分割される事あるので連結する
+            json_str = "".join(messages[2:])
+            json_ws = json.loads(json_str)
+            await bot.on_message_from_ws(json_ws)
+        except json.JSONDecodeError as e:
+            logger.error(f"Error JSONDecode: {e}")
+        except Exception as e:
+            logger.error(f"Error : {e}")
+
     def set_ws_fuyuka(ws) -> None:
         g.websocket_fuyuka = ws
 
     async def recv_fuyuka_response(message: str) -> None:
         return
+
+    websocket_uri = "wss://online.showroom-live.com"
+    asyncio.create_task(
+        websocket_listen_forever(
+            websocket_uri, recv_showroom_live_response, set_ws_showroom_live
+        )
+    )
 
     bot = ShowroomBot()
 
