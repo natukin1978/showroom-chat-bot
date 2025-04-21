@@ -7,7 +7,7 @@ import global_value as g
 from fuyuka_helper import Fuyuka
 from random_helper import is_hit_by_message_json
 from showroom_comment_log_analyzer import ShowroomCommentLogAnalyzer
-from showroom_message_helper import create_message_json
+from showroom_message_helper import create_message_json, create_message_json_from_ws
 from showroom_onlives_analyzer import ShowroomOnlivesAnalyzer
 
 logger = logging.getLogger(__name__)
@@ -45,18 +45,10 @@ class ShowroomBot:
             # 無視するID
             return
 
-        json_data = create_message_json()
-        json_data["id"] = id
-        json_data["displayName"] = json_ws["ac"]
-        if "cm" in json_ws:
-            json_data["content"] = json_ws["cm"]
-        else:
-            json_data["content"] = ""
+        json_data = create_message_json_from_ws(json_ws)
 
         answerLevel = g.config["fuyukaApi"]["answerLevel"]
-
         if "g" in json_ws:
-            json_data["content"] += " ギフトをプレゼント！"
             answerLevel = 100
 
         needs_response = is_hit_by_message_json(answerLevel, json_data)
