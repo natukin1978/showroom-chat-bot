@@ -7,7 +7,7 @@ import global_value as g
 from fuyuka_helper import Fuyuka
 from random_helper import is_hit_by_message_json
 from showroom_comment_log_analyzer import ShowroomCommentLogAnalyzer
-from showroom_message_helper import create_message_json, create_message_json_from_ws
+from showroom_message_helper import create_message_json_from_ws
 from showroom_onlives_analyzer import ShowroomOnlivesAnalyzer
 
 logger = logging.getLogger(__name__)
