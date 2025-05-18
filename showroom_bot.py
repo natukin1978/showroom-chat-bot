@@ -68,29 +68,6 @@ class ShowroomBot:
             logger.error(f"Error getting Room ID: {e}")
             return None
 
-    async def get_chat_messages(self):
-        if not self.room_id:
-            logger.error("Room ID is not set. Please call get_room_id first.")
-            return
-
-        try:
-            url = "https://www.showroom-live.com/api/live/comment_log"
-            params = {
-                "room_id": self.room_id,
-            }
-            while True:
-                async with aiohttp.ClientSession() as session:
-                    async with session.get(url, params=params) as response:
-                        response_json = await response.json()
-                        self.scla.merge(response_json)
-                        new_comments = self.scla.get_new_comments()
-                        await self.on_message(new_comments)
-                        await asyncio.sleep(self.chat_polling_interval)
-        except asyncio.CancelledError:
-            logger.error("Chat message task cancelled.")
-        except Exception as e:
-            logger.error(f"Chat message get error:{e}")
-
     async def run(self):
         while True:
             live = await self.get_live()
