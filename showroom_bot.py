@@ -23,19 +23,6 @@ class ShowroomBot:
         self.room_id = None
         self.bcsvr_key = None
 
-    async def on_message(self, comments):
-        for comment in comments:
-            json_data = create_message_json(comment)
-
-            id = json_data["id"]
-            if id in g.set_exclude_id:
-                # 無視するID
-                return
-
-            answerLevel = g.config["fuyukaApi"]["answerLevel"]
-            needs_response = is_hit_by_message_json(answerLevel, json_data)
-            await Fuyuka.send_message_by_json_with_buf(json_data, needs_response)
-
     async def on_message_from_ws(self, json_ws):
         if "ac" not in json_ws:
             return
