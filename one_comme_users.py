@@ -29,7 +29,9 @@ class OneCommeUsers:
             filter(lambda row: row[0] == f"sr-{id}", g.one_comme_users)
         )
         for filtered_row in filtered_rows:
-            return filtered_row[4]
+            nickname = filtered_row[4]
+            if nickname:
+                return nickname
 
         return None
 
