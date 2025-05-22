@@ -7,7 +7,7 @@ import global_value as g
 from fuyuka_helper import Fuyuka
 from random_helper import is_hit_by_message_json
 from showroom_comment_log_analyzer import ShowroomCommentLogAnalyzer
-from showroom_message_helper import create_message_json, create_message_json_from_ws
+from showroom_message_helper import create_message_json
 from showroom_onlives_analyzer import ShowroomOnlivesAnalyzer
 
 logger = logging.getLogger(__name__)
@@ -23,19 +23,6 @@ class ShowroomBot:
         self.room_id = None
         self.bcsvr_key = None
 
-    async def on_message(self, comments):
-        for comment in comments:
-            json_data = create_message_json(comment)
-
-            id = json_data["id"]
-            if id in g.set_exclude_id:
-                # 無視するID
-                return
-
-            answerLevel = g.config["fuyukaApi"]["answerLevel"]
-            needs_response = is_hit_by_message_json(answerLevel, json_data)
-            await Fuyuka.send_message_by_json_with_buf(json_data, needs_response)
-
     async def on_message_from_ws(self, json_ws):
         if "ac" not in json_ws:
             return
@@ -45,7 +32,7 @@ class ShowroomBot:
             # 無視するID
             return
 
-        json_data = create_message_json_from_ws(json_ws)
+        json_data = create_message_json(json_ws)
 
         answerLevel = g.config["fuyukaApi"]["answerLevel"]
         if "g" in json_ws:
@@ -67,29 +54,6 @@ class ShowroomBot:
         except Exception as e:
             logger.error(f"Error getting Room ID: {e}")
             return None
-
-    async def get_chat_messages(self):
-        if not self.room_id:
-            logger.error("Room ID is not set. Please call get_room_id first.")
-            return
-
-        try:
-            url = "https://www.showroom-live.com/api/live/comment_log"
-            params = {
-                "room_id": self.room_id,
-            }
-            while True:
-                async with aiohttp.ClientSession() as session:
-                    async with session.get(url, params=params) as response:
-                        response_json = await response.json()
-                        self.scla.merge(response_json)
-                        new_comments = self.scla.get_new_comments()
-                        await self.on_message(new_comments)
-                        await asyncio.sleep(self.chat_polling_interval)
-        except asyncio.CancelledError:
-            logger.error("Chat message task cancelled.")
-        except Exception as e:
-            logger.error(f"Chat message get error:{e}")
 
     async def run(self):
         while True:
