@@ -28,7 +28,6 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 g.map_is_first_on_stream = {}
-g.one_comme_users = OneCommeUsers.read_one_comme_users()
 g.set_exclude_id = read_text_set("exclude_id.txt")
 # g.set_needs_response = set()
 g.websocket_showroom_live = None
