@@ -7,6 +7,7 @@ import aiohttp
 
 import global_value as g
 from fuyuka_helper import Fuyuka
+from one_comme_users import OneCommeUsers
 from random_helper import is_hit_by_message_json
 from showroom_comment_log_analyzer import ShowroomCommentLogAnalyzer
 from showroom_message_helper import create_message_json
@@ -96,8 +97,10 @@ class ShowroomBot:
             await self.handle_incoming_giftmessage(id, json_data)
             return
 
-        answerLevel = g.config["fuyukaApi"]["answerLevel"]
-        needs_response = is_hit_by_message_json(answerLevel, json_data)
+        answer_level = g.config["fuyukaApi"]["answerLevel"]
+        answer_length = g.config["fuyukaApi"]["answerLength"]["default"]
+        needs_response = is_hit_by_message_json(answer_level, json_data)
+        OneCommeUsers.update_additional_requests(json_data, answer_length)
         await Fuyuka.send_message_by_json_with_buf(json_data, needs_response)
 
     async def get_live(self):
