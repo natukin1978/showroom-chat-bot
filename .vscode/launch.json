@@ -8,7 +8,7 @@
             "name": "Run & Debug",
             "type": "debugpy",
             "request": "launch",
-            "program": "showroom_chat_bot.py",
+            "program": "main.py",
             "console": "integratedTerminal"
         },
         {

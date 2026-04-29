@@ -24,7 +24,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Build executable with PyInstaller
-        run: pyinstaller showroom_chat_bot.py --name ShowroomChatBot.exe
+        run: pyinstaller main.py --name ShowroomChatBot.exe
 
       - name: Rename config.json
         run: ren config.json.template config.json
