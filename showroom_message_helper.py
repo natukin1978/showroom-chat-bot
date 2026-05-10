@@ -21,5 +21,7 @@ def create_message_json(json_ws) -> dict[str, any]:
         json_data["content"] = json_ws["cm"]
     if "g" in json_ws:
         json_data["content"] += " ギフトをプレゼント！"
+    if "ua" in json_ws and json_ws["ua"] == 2:
+        json_data["isFirst"] = True
     OneCommeUsers.update_message_json(json_data)
     return json_data
