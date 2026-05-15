@@ -15,7 +15,7 @@ def create_message_json(json_ws) -> dict[str, any]:
         "isFirst": False,
         "isFirstOnStream": None,  # すぐ下で設定する
         "noisy": False,
-        "additionalRequests": None,  # すぐ下で設定する
+        # "additionalRequests": None,  # すぐ下で設定する
     }
     if "cm" in json_ws:
         json_data["content"] = json_ws["cm"]
