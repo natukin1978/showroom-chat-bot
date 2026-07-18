@@ -68,21 +68,21 @@ class OneCommeUsers:
         OneCommeUsers.save_is_first_on_stream()
 
     @staticmethod
+    def append_additional_request(
+        json_data: dict[str, any], value: str
+    ) -> None:
+        ars = json_data.get("additionalRequests", [])
+        ars.append(value)
+        json_data["additionalRequests"] = ars
+
+    @staticmethod
     def update_additional_requests(
         json_data: dict[str, any], answer_length: int
     ) -> None:
-        ar = ""
         if answer_length == 0:
-            ar = "The content is understood and the response is OK"
+            OneCommeUsers.append_additional_request(json_data, "The content is understood and the response is OK")
         elif answer_length != g.config["fuyukaApi"]["answerLength"]["default"]:
-            ar = " ".join(
-                [
-                    g.ADDITIONAL_REQUESTS_PROMPT.format(answerLength=answer_length),
-                ]
-            )
-        if not ar:
-            return
-        json_data["additionalRequests"] = ar
+            OneCommeUsers.append_additional_request(json_data, g.ADDITIONAL_REQUESTS_PROMPT.format(answerLength=answer_length))
 
     @staticmethod
     def update_message_json(json_data: dict[str, any]) -> None:
