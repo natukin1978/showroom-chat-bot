@@ -15,6 +15,23 @@ from showroom_onlives_analyzer import ShowroomOnlivesAnalyzer
 
 logger = logging.getLogger(__name__)
 
+def is_count_call(target: str) -> bool:
+    """
+    SHOWROOM特有の文化であるカウントコールかを判定します。
+
+    Args:
+        target (str): 判定対象の文字列
+
+    Returns:
+        bool: 2〜49の数値の場合はTrue、それ以外（範囲外や数値以外）はFalse
+    """
+    # 1. 文字列が半角数字のみで構成されているかチェック（空文字や負の数、小数、英字を排除）
+    if not isinstance(target, str) or not target.isdigit():
+        return False
+
+    # 2. 文字列を整数に変換して範囲をチェック
+    number = int(target)
+    return 2 <= number <= 49
 
 class ShowroomBot:
 
@@ -95,6 +112,10 @@ class ShowroomBot:
         if "g" in json_ws:
             # 新しいギフトメッセージを受け取った
             await self.handle_incoming_giftmessage(id, json_data)
+            return
+
+        if is_count_call(json_data.get("content")):
+            # カウントコールはスキップ
             return
 
         answer_level = g.config["fuyukaApi"]["answerLevel"]
