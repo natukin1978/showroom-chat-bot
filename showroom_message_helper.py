@@ -9,16 +9,14 @@ def create_message_json(json_ws) -> dict[str, any]:
     json_data = {
         "dateTime": localtime_iso_8601,
         "id": str(json_ws["u"]),
-        "displayName": json_ws["ac"],
+        "displayName": json_ws.get("ac"),
         "nickname": None,  # すぐ下で設定する
-        "content": "",  # すぐ下で設定する
+        "content": json_ws.get("cm", ""),
         "isFirst": False,
         "isFirstOnStream": None,  # すぐ下で設定する
         "noisy": False,
         # "additionalRequests": None,  # すぐ下で設定する
     }
-    if "cm" in json_ws:
-        json_data["content"] = json_ws["cm"]
     if "g" in json_ws:
         json_data["content"] += " ギフトをプレゼント！"
     if "ua" in json_ws and json_ws["ua"] == 2:
